@@ -1,0 +1,52 @@
+﻿StaffID,StaffName,Gender,Contact,EmploymentType,StartDatetime,Department,DOB
+S0001,Aaron Patel,Male,S0001@greengrass.sg,Full-time,2012-06-15 09:33:30,Inventory,1983-01-24
+S0002,Joseph Mahmud,Male,S0002@greengrass.sg,Full-time,2011-12-28 14:03:01,Reference,1988-04-08
+S0003,Julia Mahmud,Male,S0003@greengrass.sg,Part-time,2014-02-03 10:23:45,Inventory,1984-12-04
+S0004,Michelle King,Female,S0004@greengrass.sg,Part-time,2013-08-14 11:10:46,Membership,1997-02-19
+S0005,Mark Menon,Female,S0005@greengrass.sg,Part-time,2014-01-01 12:42:37,Membership,1993-01-01
+S0006,Joy Hill,Male,S0006@greengrass.sg,Full-time,2011-12-29 09:44:36,Reference,1982-04-08
+S0007,Harry Cook,Female,S0007@greengrass.sg,Full-time,2013-07-27 11:40:36,Inventory,1996-10-01
+S0008,Leonard Johnson,Male,S0008@greengrass.sg,Part-time,2010-11-15 12:22:20,Digital Services,1997-04-23
+S0009,Derek Gupta,Female,S0009@greengrass.sg,Full-time,2010-02-16 13:13:15,Circulation,1997-07-08
+S0010,Linda Wong,Female,S0010@greengrass.sg,Part-time,2010-07-17 14:28:46,Digital Services,1994-10-09
+S0011,Valerie Young,Male,S0011@greengrass.sg,Full-time,2013-12-09 15:06:53,Digital Services,1980-03-23
+S0012,Claire Ma,Male,S0012@greengrass.sg,Full-time,2010-10-29 09:18:01,Inventory,1993-06-09
+S0013,Edward Abdullah,Male,S0013@greengrass.sg,Part-time,2011-11-28 15:10:46,Reference,1984-04-25
+S0014,Leon Harun,Female,S0014@greengrass.sg,Full-time,2015-06-01 09:27:41,Circulation,1990-02-03
+S0015,Kristine Taylor,Female,S0015@greengrass.sg,Part-time,2011-02-19 13:13:12,Inventory,1992-02-12
+S0016,Hui Ting Abdullah,Female,S0016@greengrass.sg,Full-time,2012-08-30 10:03:25,Circulation,1991-10-09
+S0017,Bella Baker,Female,S0017@greengrass.sg,Full-time,2014-01-17 09:27:05,Circulation,1981-12-15
+S0018,Audrey Yeo,Female,S0018@greengrass.sg,Full-time,2010-04-16 12:10:40,Inventory,1997-02-13
+S0019,Alicia Toh,Female,S0019@greengrass.sg,Full-time,2014-06-17 16:31:57,Inventory,1982-09-10
+S0020,Carl Ma,Female,S0020@greengrass.sg,Part-time,2014-04-12 13:11:28,Inventory,1999-06-19
+S0021,Julian Thompson,Male,S0021@greengrass.sg,Full-time,2012-07-15 12:36:03,Inventory,1986-12-03
+S0022,Joanne Green,Female,S0022@greengrass.sg,Part-time,2014-08-23 11:35:03,Reference,1981-11-08
+S0023,Julia Evans,Male,S0023@greengrass.sg,Full-time,2012-08-23 16:19:05,Circulation,1989-02-28
+S0024,Norman Loh,Male,S0024@greengrass.sg,Part-time,2015-01-14 11:10:13,Circulation,1987-02-13
+S0025,Joseph Adams,Female,S0025@greengrass.sg,Part-time,2014-11-19 12:52:40,Circulation,1988-08-21
+S0026,Ting Ting Singh,Female,S0026@greengrass.sg,Part-time,2010-12-23 15:35:25,Circulation,1991-03-12
+S0027,Joshua Quek,Male,S0027@greengrass.sg,Full-time,2015-11-11 15:07:26,Reference,1991-04-22
+S0028,Emma Roberts,Female,S0028@greengrass.sg,Part-time,2/18/2011 13:55,Digital Services,1988-12-22
+S0029,Angela Das,Male,S0029@greengrass.sg,Part-time,2015-06-12 16:02:11,Circulation,1982-10-21
+S0030,Charles Martin,Female,S0030@greengrass.sg,Part-time,2014-06-10 14:44:15,Inventory,1985-09-24
+S0031,Candice Deng,Female,S0031@greengrass.sg,Part-time,2010-03-24 14:52:50,Circulation,1987-03-15
+S0032,Nora Clark,Female,S0032@greengrass.sg,Part-time,2012-07-22 10:19:47,Digital Services,1992-05-21
+S0033,Kimberly Harris,Female,S0033@greengrass.sg,Part-time,2011-01-01 11:28:13,Circulation,1997-04-22
+S0034,Carmen Das,Male,S0034@greengrass.sg,Full-time,2015-10-12 11:04:19,Membership,1990-01-08
+S0035,Walter Goh,Female,S0035@greengrass.sg,Full-time,2012-02-29 12:53:03,Inventory,1981-06-13
+S0036,Sarah Hamid,Female,S0036@greengrass.sg,Full-time,2012-03-26 13:23:52,Circulation,1988-02-07
+S0037,Pamela Wu,Female,S0037@greengrass.sg,Part-time,2012-09-17 14:31:38,Inventory,1998-12-11
+S0038,Gavin He,Male,S0038@greengrass.sg,Part-time,2011-11-01 13:47:53,Circulation,1986-11-16
+S0039,Shawn Davis,Male,S0039@greengrass.sg,Part-time,2011-10-30 11:54:14,Digital Services,1992-11-15
+S0040,Alan Ahmad,Male,S0040@greengrass.sg,Full-time,2015-10-04 08:55:49,Reference,1984-05-05
+S0041,Caroline Thomas,Female,S0041@greengrass.sg,Part-time,2010-02-04 12:16:38,Digital Services,1987-12-18
+S0042,Sharon Xie,Female,S0042@greengrass.sg,Full-time,2013-11-29 16:16:13,Circulation,1997-05-24
+S0043,Ann Xie,Male,S0043@greengrass.sg,Part-time,2015-09-27 13:35:41,Circulation,1998-07-19
+S0044,Angela Ma,Female,S0044@greengrass.sg,Full-time,2013-10-09 13:40:20,Membership,1992-06-08
+S0045,Kathleen Williams,Female,S0045@greengrass.sg,Full-time,2015-10-20 12:57:03,Circulation,1984-09-16
+S0046,Linda Das,Female,S0046@greengrass.sg,Full-time,2015-07-31 13:16:58,Reference,1982-01-28
+S0047,Sean Wilson,Female,S0047@greengrass.sg,Part-time,2012-02-17 14:46:45,Reference,1983-03-21
+S0048,Xin Yi Zhang,Female,S0048@greengrass.sg,Full-time,2013-05-14 11:53:42,Digital Services,1985-11-14
+S0049,Yan Ling Garcia,Male,S0049@greengrass.sg,Part-time,2011-06-09 13:46:51,Circulation,1999-02-13
+S0050,Catherine Chandra,Female,S0050@greengrass.sg,Part-time,2012-06-29 14:14:47,Inventory,1992-10-15
+S0051,Hanto Mephilo,Male,S0051@greengrass.sg,Full-time,2012-09-17 14:31:38,Advisory,1996-05-18
