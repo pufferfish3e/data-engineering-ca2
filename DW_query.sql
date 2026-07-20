@@ -1,7 +1,7 @@
 -- ST1501 CA2 Task d) - Data warehouse analytics (6 queries, group of 3)
 -- Aspects covered: time trends, book/genre popularity, member behaviour,
 -- staff operations, loan duration & lateness measures
-USE CA2DW2B2105;
+USE CA2DW2B2104;
 
 -- Q1 [Time] Monthly loan volume across years: seasonal pattern of borrowing
 SELECT d.Year, d.MonthName, COUNT(*) AS TotalLoans, ROUND(AVG(f.LoanDurationDays),2) AS AvgDurationDays

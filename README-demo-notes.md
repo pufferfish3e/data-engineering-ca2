@@ -8,12 +8,12 @@ The databases live in a custom data directory. Start the server first:
 ```
 
 Leave that window open. Login: user `root`, password `DAAA-1B-03`, port 3306.
-Databases: `CA22B2105` (OLTP) and `CA2DW2B2105` (DW).
+Databases: `CA22B2105` (OLTP) and `CA2DW2B2104` (DW).
 
 ## Workbench reverse-engineer diagrams (2 screenshots still needed)
 1. Start the server (above), open MySQL Workbench, connect to localhost:3306 as root.
 2. Database → Reverse Engineer → select `CA22B2105` → next through → screenshot the diagram.
-3. Repeat for `CA2DW2B2105`.
+3. Repeat for `CA2DW2B2104`.
 4. Paste them into `2B21-05_group_submission.docx` at the two bold
    `<< PASTE MySQL Workbench ... >>` placeholders (tasks a and c), delete the placeholder
    lines, re-zip as `2B21-05.zip` (or re-copy into `submission/` and re-zip).

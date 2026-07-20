@@ -1,7 +1,5 @@
--- ST1501 CA2 Task c) - Data Warehouse creation (star schema)
--- Class 2B21 Group 05
-CREATE DATABASE CA2DW2B2105;
-USE CA2DW2B2105;
+CREATE DATABASE CA2DW2B2104;
+USE CA2DW2B2104;
 
 -- Date dimension, day-level granularity as instructed
 CREATE TABLE DimDate (
