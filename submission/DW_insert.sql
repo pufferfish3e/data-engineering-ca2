@@ -1,5 +1,5 @@
--- ST1501 CA2 Task c) - ETL: load DW from OLTP (CA22B2105 -> CA2DW2B2105)
-USE CA2DW2B2105;
+-- ST1501 CA2 Task c) - ETL: load DW from OLTP (CA22B2104 -> CA2DW2B2104)
+USE CA2DW2B2104;
 SET SESSION cte_max_recursion_depth = 3000; -- 7 years of days exceeds the default 1000
 
 -- DimDate: generate every calendar day covering the loan history (2020-01-01 to 2026-12-31)
