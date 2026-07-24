@@ -31,9 +31,9 @@ FROM CA22B2104.Book b
 JOIN CA22B2104.MembershipTier t ON b.MinTierID = t.TierID;
 
 -- FactLoan: completed loans only (returned), per the analytical focus of the brief
-INSERT INTO FactLoan (MemberKey, StaffKey, BookKey, BorrowDateKey, ReturnDateKey,
+INSERT INTO FactLoan (MemberKey, StaffKey, BookKey, BorrowDateKey,
                       CopySeqNo, LoanDurationDays, DaysBeforeDue, IsLate)
-SELECT dm.MemberKey, ds.StaffKey, db.BookKey, bd.DateKey, rd.DateKey,
+SELECT dm.MemberKey, ds.StaffKey, db.BookKey, bd.DateKey,
        l.CopySeqNo,
        DATEDIFF(DATE(l.ReturnDatetime), DATE(l.StartDatetime)),
        DATEDIFF(l.DueDate, DATE(l.ReturnDatetime)),
@@ -43,7 +43,6 @@ JOIN DimMember dm ON dm.MemberID = l.MemberID
 JOIN DimStaff  ds ON ds.StaffID  = l.StaffID
 JOIN DimBook   db ON db.BookID   = l.BookID
 JOIN DimDate   bd ON bd.FullDate = DATE(l.StartDatetime)
-JOIN DimDate   rd ON rd.FullDate = DATE(l.ReturnDatetime)
 WHERE l.ReturnDatetime IS NOT NULL;
 
 -- ===== ETL verification queries =====

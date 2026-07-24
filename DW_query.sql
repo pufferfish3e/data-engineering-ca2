@@ -54,3 +54,64 @@ JOIN DimDate d ON f.BorrowDateKey = d.DateKey
 WHERE b.Genre IN ('Children', 'Young Adult')
 GROUP BY b.Genre, d.Month, d.MonthName
 ORDER BY b.Genre, d.Month;
+
+
+-- ================================================================
+-- PART D: ANALYSIS 7
+-- Staff workload by department and employment type
+-- Add this query to DW_query.sql.
+-- ================================================================
+SELECT
+    ds.Department,
+    ds.EmploymentType,
+    COUNT(*) AS CompletedLoans,
+    ROUND(AVG(f.LoanDurationDays), 2) AS AvgLoanDurationDays,
+    ROUND(100.0 * AVG(f.IsLate), 2) AS LateReturnRatePct
+FROM FactLoan AS f
+JOIN DimStaff AS ds
+  ON ds.StaffKey = f.StaffKey
+GROUP BY
+    ds.Department,
+    ds.EmploymentType
+ORDER BY
+    CompletedLoans DESC,
+    ds.Department,
+    ds.EmploymentType;
+
+
+-- ================================================================
+-- PART D: ANALYSIS 8
+-- Severity of late returns
+-- Add this query to DW_query.sql.
+-- ================================================================
+WITH ReturnBands AS (
+    SELECT
+        CASE
+            WHEN DaysBeforeDue >= 0 THEN 'On time or early'
+            WHEN DaysBeforeDue BETWEEN -3 AND -1 THEN '1-3 days late'
+            WHEN DaysBeforeDue BETWEEN -7 AND -4 THEN '4-7 days late'
+            ELSE '8+ days late'
+        END AS ReturnTimingBand,
+        LoanDurationDays
+    FROM FactLoan
+),
+BandSummary AS (
+    SELECT
+        ReturnTimingBand,
+        COUNT(*) AS LoanCount,
+        ROUND(AVG(LoanDurationDays), 2) AS AvgLoanDurationDays
+    FROM ReturnBands
+    GROUP BY ReturnTimingBand
+)
+SELECT
+    ReturnTimingBand,
+    LoanCount,
+    ROUND(100.0 * LoanCount / SUM(LoanCount) OVER (), 2) AS SharePct,
+    AvgLoanDurationDays
+FROM BandSummary
+ORDER BY CASE ReturnTimingBand
+    WHEN 'On time or early' THEN 1
+    WHEN '1-3 days late' THEN 2
+    WHEN '4-7 days late' THEN 3
+    ELSE 4
+END;

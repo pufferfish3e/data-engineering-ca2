@@ -53,7 +53,6 @@ CREATE TABLE FactLoan (
     StaffKey INT NOT NULL,
     BookKey INT NOT NULL,
     BorrowDateKey INT NOT NULL,
-    ReturnDateKey INT NOT NULL,
     CopySeqNo INT NOT NULL,                   -- degenerate dimension
     LoanDurationDays INT NOT NULL,            -- return date - borrow date
     DaysBeforeDue INT NOT NULL,               -- due date - return date (negative = late)
@@ -61,6 +60,5 @@ CREATE TABLE FactLoan (
     FOREIGN KEY (MemberKey) REFERENCES DimMember(MemberKey),
     FOREIGN KEY (StaffKey) REFERENCES DimStaff(StaffKey),
     FOREIGN KEY (BookKey) REFERENCES DimBook(BookKey),
-    FOREIGN KEY (BorrowDateKey) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (ReturnDateKey) REFERENCES DimDate(DateKey)
+    FOREIGN KEY (BorrowDateKey) REFERENCES DimDate(DateKey)
 );
