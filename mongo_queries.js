@@ -1,20 +1,36 @@
-use('CA2Mongo');
+// Task e)(ii): run after mongo_setup.js has loaded CA2Mongo.Book.
+// To run the file: ctmongosh --file .\mongo_setup.js
 
-// e)(ii) Q1: titles, genres, loan counts of books borrowed more than 400 times,
-// descending by loan count
-print('--- Q1 ---');
-db.Book.find(
-    { totalLoans: { $gt: 400 } },
-    { _id: 0, title: 1, genre: 1, totalLoans: 1 }
-).sort({ totalLoans: -1 }).forEach(d => printjson(d));
+const ca2Mongo = db.getSiblingDB('CA2Mongo');
 
-// e)(ii) Q2: per genre - number of books and average loans per book;
-// only genres with > 50 books and average loans > 70; sort by average desc
-print('--- Q2 ---');
-db.Book.aggregate([
-    { $group: { _id: "$genre",
-                numBooks: { $sum: 1 },
-                avgLoansPerBook: { $avg: "$totalLoans" } } },
-    { $match: { numBooks: { $gt: 50 }, avgLoansPerBook: { $gt: 70 } } },
-    { $sort: { avgLoansPerBook: -1 } }
-]).forEach(d => printjson(d));
+print('--- Q1: books borrowed more than 400 times ---');
+printjson(ca2Mongo.Book.find(
+    { totalLoanTransactions: { $gt: 400 } },
+    { _id: 0, title: 1, genre: 1, totalLoanTransactions: 1 }
+).sort({ totalLoanTransactions: -1, title: 1 }).toArray());
+
+print('--- Q2: qualifying genre loan averages ---');
+printjson(ca2Mongo.Book.aggregate([
+    {
+        $group: {
+            _id: '$genre',
+            numberOfBooks: { $sum: 1 },
+            averageLoansPerBook: { $avg: '$totalLoanTransactions' }
+        }
+    },
+    {
+        $match: {
+            numberOfBooks: { $gt: 50 },
+            averageLoansPerBook: { $gt: 70 }
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            genre: '$_id',
+            numberOfBooks: 1,
+            averageLoansPerBook: { $round: ['$averageLoansPerBook', 2] }
+        }
+    },
+    { $sort: { averageLoansPerBook: -1, genre: 1 } }
+]).toArray());
