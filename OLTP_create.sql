@@ -1,5 +1,5 @@
-create database CA2OLTP;
-use CA2OLTP;
+create database CA22B2104;
+use CA22B2104;
 -- change db name accordingly
 
 CREATE TABLE MembershipTier (

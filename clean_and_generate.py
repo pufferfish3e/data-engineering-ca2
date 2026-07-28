@@ -1,8 +1,8 @@
-# Cleans data.zip contents and generates OLTP_insert.sql for CA22B2105
+# Cleans data.zip contents and generates OLTP_insert.sql for CA22B2104
 import pandas as pd
 from pathlib import Path
 
-DB = "CA22B2105"
+DB = "CA22B2104"
 out = Path(__file__).parent
 xl = pd.ExcelFile(out / "Data" / "data.xlsx")
 members = xl.parse("Members")

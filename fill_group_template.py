@@ -90,7 +90,7 @@ ver = ("ETL verification: (1) Row-count reconciliation - completed loans in OLTP
        "to each dimension returns 0 orphan rows, and all foreign keys are enforced by constraints so no fact row can "
        "reference a missing dimension member. The verification queries are included at the bottom of DW_insert.sql.")
 insert_after(p, ver)
-insert_after(p, '<< PASTE MySQL Workbench reverse-engineered diagram of CA2DW2B2105 here >>', bold=True)
+insert_after(p, '<< PASTE MySQL Workbench reverse-engineered diagram of CA2DW2B2104 here >>', bold=True)
 
 analyses = [
  ("Objective: identify long-term and seasonal trends in loan volume by month and year (time dimension). "

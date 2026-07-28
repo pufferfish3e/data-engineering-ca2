@@ -1,7 +1,5 @@
--- ST1501 CA2 Task c) - Data Warehouse creation (star schema)
--- Class 2B21 Group 05
-CREATE DATABASE CA2DW2B2105;
-USE CA2DW2B2105;
+CREATE DATABASE CA2DW2B2104;
+USE CA2DW2B2104;
 
 -- Date dimension, day-level granularity as instructed
 CREATE TABLE DimDate (
@@ -55,7 +53,6 @@ CREATE TABLE FactLoan (
     StaffKey INT NOT NULL,
     BookKey INT NOT NULL,
     BorrowDateKey INT NOT NULL,
-    ReturnDateKey INT NOT NULL,
     CopySeqNo INT NOT NULL,                   -- degenerate dimension
     LoanDurationDays INT NOT NULL,            -- return date - borrow date
     DaysBeforeDue INT NOT NULL,               -- due date - return date (negative = late)
@@ -63,6 +60,5 @@ CREATE TABLE FactLoan (
     FOREIGN KEY (MemberKey) REFERENCES DimMember(MemberKey),
     FOREIGN KEY (StaffKey) REFERENCES DimStaff(StaffKey),
     FOREIGN KEY (BookKey) REFERENCES DimBook(BookKey),
-    FOREIGN KEY (BorrowDateKey) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (ReturnDateKey) REFERENCES DimDate(DateKey)
+    FOREIGN KEY (BorrowDateKey) REFERENCES DimDate(DateKey)
 );
