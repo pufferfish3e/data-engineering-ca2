@@ -1,5 +1,5 @@
 // Task e)(ii): run after mongo_setup.js has loaded CA2Mongo.Book.
-// To run the file: ctmongosh --file .\mongo_setup.js
+// To run the file: mongosh --file .\mongo_queries.js
 
 const ca2Mongo = db.getSiblingDB('CA2Mongo');
 
