@@ -7,6 +7,8 @@ USE CA2DW2B2104;
 -- ================================================================
 
 -- C1. Row-count reconciliation
+-- Compare source and warehouse counts in one result row. FactLoan excludes the
+-- open loan, so it is compared only with OLTP loans having a return date.
 SELECT
     (SELECT COUNT(*)
        FROM CA22B2104.Loan
@@ -28,6 +30,8 @@ SELECT
 -- DimDate                  = 2,557
 
 -- C2. Measure reconciliation
+-- Recalculate total completed-loan duration in OLTP and compare it with the
+-- transformed FactLoan measure; matching totals validate the ETL calculation.
 SELECT
     (SELECT SUM(DATEDIFF(DATE(ReturnDatetime), DATE(StartDatetime)))
        FROM CA22B2104.Loan
@@ -38,6 +42,8 @@ SELECT
 -- Expected result: 108,801 days on both sides.
 
 -- C3. Complete orphan-key check across every dimension
+-- LEFT JOIN preserves every fact row. Any NULL dimension key after the joins
+-- identifies a foreign key that did not resolve during the warehouse load.
 SELECT COUNT(*) AS orphan_fact_rows
 FROM FactLoan AS f
 LEFT JOIN DimMember AS dm
@@ -56,6 +62,8 @@ WHERE dm.MemberKey IS NULL
 -- Expected result: 0.
 
 -- C4. Date-dimension range and row count
+-- Confirm the generated calendar includes every required date, including dates
+-- beyond the final borrow date that are needed for due and return-date coverage.
 SELECT
     MIN(FullDate) AS first_date,
     MAX(FullDate) AS last_date,

@@ -5,6 +5,8 @@ USE CA2DW2B2104;
 -- ============================================================================
 -- Query 1 | Monthly loan volume and average duration
 -- ============================================================================
+-- Join each completed loan to its borrow date, then aggregate the fact rows by
+-- calendar month. Month number is included to keep January–December order.
 SELECT
     d.Year,
     d.MonthName,
@@ -24,6 +26,8 @@ ORDER BY
 -- ============================================================================
 -- Query 2 | Borrowing pattern by day of week
 -- ============================================================================
+-- Count completed loans by weekday. The scalar subquery supplies the overall
+-- fact-row count so each weekday can also be expressed as a percentage of all loans.
 SELECT
     d.DayOfWeek,
     COUNT(*) AS TotalLoans,
@@ -40,6 +44,8 @@ ORDER BY
 -- ============================================================================
 -- Query 3 | Genre popularity and borrowing intensity per title
 -- ============================================================================
+-- Measure both total demand and catalogue breadth per genre. LoansPerBook
+-- prevents a genre with many titles appearing popular only because it is larger.
 SELECT
     b.Genre,
     COUNT(*) AS TotalLoans,
@@ -57,6 +63,8 @@ ORDER BY
 -- ============================================================================
 -- Query 4 | Members with the highest and lowest borrowing activity
 -- ============================================================================
+-- First summarise each member once in a CTE. The two ordered result sets then
+-- return the five most-active and five least-active members without re-joining.
 WITH member_activity AS (
     SELECT
         m.MemberID,
@@ -73,6 +81,7 @@ WITH member_activity AS (
         m.Name,
         m.TierName
 )
+-- Sort descending to select the five members with the greatest loan count.
 (
     SELECT
         'Top 5' AS MemberGroup,
@@ -87,6 +96,7 @@ WITH member_activity AS (
     LIMIT 5
 )
 UNION ALL
+-- Sort ascending to select the five members with the smallest loan count.
 (
     SELECT
         'Bottom 5' AS MemberGroup,
@@ -104,6 +114,8 @@ UNION ALL
 -- ============================================================================
 -- Query 5 | Loan duration and late-return rate by membership tier
 -- ============================================================================
+-- IsLate is stored as 1 for a late return and 0 otherwise, so SUM(IsLate)
+-- counts late returns and its percentage gives the late-return rate per tier.
 SELECT
     m.TierName,
     COUNT(*) AS TotalLoans,
@@ -122,6 +134,8 @@ ORDER BY
 -- ============================================================================
 -- Query 6 | Monthly demand for Children and Young Adult genres
 -- ============================================================================
+-- Restrict the fact rows to the two requested genres, then group by month.
+-- Month number is retained only for chronological sorting in the final result.
 SELECT
     b.Genre,
     d.Month,
@@ -144,6 +158,8 @@ ORDER BY
 -- ============================================================================
 -- Query 7 | Staff workload by department and employment type
 -- ============================================================================
+-- Count completed loans processed by each department/employment-type group.
+-- AVG(IsLate) converts the 0/1 late flag into the group's late-return percentage.
 SELECT
     s.Department,
     s.EmploymentType,
@@ -164,6 +180,8 @@ ORDER BY
 -- ============================================================================
 -- Query 8 | Severity bands for late returns
 -- ============================================================================
+-- The first CTE classifies every completed loan from DaysBeforeDue: a negative
+-- value means it was returned after its due date. The second CTE summarises bands.
 WITH return_bands AS (
     SELECT
         CASE
@@ -175,6 +193,7 @@ WITH return_bands AS (
         LoanDurationDays
     FROM FactLoan
 ),
+-- Count the loans and calculate average duration within each return-timing band.
 band_summary AS (
     SELECT
         ReturnTimingBand,
@@ -184,6 +203,8 @@ band_summary AS (
     GROUP BY
         ReturnTimingBand
 )
+-- The window total calculates each band's share without collapsing the four rows.
+-- CASE assigns business-friendly order: on time first, then increasingly late.
 SELECT
     ReturnTimingBand,
     LoanCount,
