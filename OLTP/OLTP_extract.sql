@@ -2,19 +2,22 @@
 
 USE CA22B2104;
 
+-- Start from Book so every book appears, even if it has no copies or loans.
+-- The two derived tables pre-calculate copy and loan totals before they are joined.
 SELECT
     b.BookID AS bookId,
     b.Title AS title,
     b.Author AS author,
     b.Genre AS genre,
     mt.TierName AS minimumMembershipTier,
-    COALESCE(c.totalCopies, 0) AS totalCopies,
-    COALESCE(c.lostCopies, 0) AS lostCopies,
-    COALESCE(l.totalLoanTransactions, 0) AS totalLoanTransactions
+    IFNULL(c.totalCopies, 0) AS totalCopies,
+    IFNULL(c.lostCopies, 0) AS lostCopies,
+    IFNULL(l.totalLoanTransactions, 0) AS totalLoanTransactions
 FROM Book AS b
 JOIN MembershipTier AS mt
   ON mt.TierID = b.MinTierID
 LEFT JOIN (
+    -- One row per book: total copies and copies currently marked Lost.
     SELECT
         BookID,
         COUNT(*) AS totalCopies,
@@ -24,6 +27,7 @@ LEFT JOIN (
 ) AS c
   ON c.BookID = b.BookID
 LEFT JOIN (
+    -- One row per book: total borrowing transactions across all its copies.
     SELECT
         BookID,
         COUNT(*) AS totalLoanTransactions
