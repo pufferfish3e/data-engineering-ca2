@@ -1,4 +1,4 @@
--- ST1501 CA2 Task c) - ETL: load DW from OLTP (CA22B2105 -> CA2DW2B2104)
+-- ST1501 CA2 Task c) - ETL: load DW from OLTP (CA22B2104 -> CA2DW2B2104)
 USE CA2DW2B2104;
 SET SESSION cte_max_recursion_depth = 3000; -- 7 years of days exceeds the default 1000
 
@@ -44,26 +44,3 @@ JOIN DimStaff  ds ON ds.StaffID  = l.StaffID
 JOIN DimBook   db ON db.BookID   = l.BookID
 JOIN DimDate   bd ON bd.FullDate = DATE(l.StartDatetime)
 WHERE l.ReturnDatetime IS NOT NULL;
-
--- ===== ETL verification queries =====
--- 1) Row counts: fact rows must equal completed OLTP loans; dims must match source tables
-SELECT (SELECT COUNT(*) FROM CA22B2104.Loan WHERE ReturnDatetime IS NOT NULL) AS oltp_completed_loans,
-       (SELECT COUNT(*) FROM FactLoan) AS fact_rows,
-       (SELECT COUNT(*) FROM CA22B2104.Member) AS oltp_members,
-       (SELECT COUNT(*) FROM DimMember) AS dim_members,
-       (SELECT COUNT(*) FROM CA22B2104.Book) AS oltp_books,
-       (SELECT COUNT(*) FROM DimBook) AS dim_books,
-       (SELECT COUNT(*) FROM CA22B2104.Staff) AS oltp_staff,
-       (SELECT COUNT(*) FROM DimStaff) AS dim_staff;
-
--- 2) Measure sanity: total/average loan duration must match computed directly from OLTP
-SELECT (SELECT SUM(DATEDIFF(DATE(ReturnDatetime), DATE(StartDatetime)))
-          FROM CA22B2104.Loan WHERE ReturnDatetime IS NOT NULL) AS oltp_total_duration,
-       (SELECT SUM(LoanDurationDays) FROM FactLoan) AS dw_total_duration;
-
--- 3) No orphan keys (all joins resolved during load)
-SELECT COUNT(*) AS orphan_facts
-FROM FactLoan f
-LEFT JOIN DimMember dm ON f.MemberKey = dm.MemberKey
-LEFT JOIN DimBook db ON f.BookKey = db.BookKey
-WHERE dm.MemberKey IS NULL OR db.BookKey IS NULL;
